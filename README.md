@@ -14,5 +14,5 @@ The player controls a sphere named *Willow*, navigating through dynamic platform
 - **Language**: C#
 
 ## How to Run
-- Open the Project in Unity 2022.3.3f1
+- Open the Project in Unity 2022
 - Press Run to start 
