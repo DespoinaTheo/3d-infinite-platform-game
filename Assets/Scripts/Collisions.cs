@@ -22,14 +22,14 @@ public class Collisions : MonoBehaviour
     }
     void OnCollisionEnter (Collision collisionInfo)
     {
-        //Αποτέλεσμα σύγκρουσης με τα εμπόδια της κάθε πίστας (-1 ζωή)
+        // Collision result with level obstacles (-1 life)
         if (collisionInfo.collider.tag == "Obstacles") {
             if(lives > 0){
                 lives -=1;
                 HealthUpdate.text = "Lives: " + lives.ToString();
                 source.PlayOneShot(clip2, 1f);
             }
-            //0 ζωές (Game Over)
+            // 0 lives (Game Over)
             if(lives <= 0){
                 EndGame();
             }
@@ -37,19 +37,19 @@ public class Collisions : MonoBehaviour
     }
     private void OnTriggerExit (Collider other)
     {
-        // Αποτέλεσμα σύγκρουσης με το Power Up (+1 ζωή)
+        // Collision result with Power Up (+1 life)
         if (other.gameObject.tag == "Lives"){
             lives +=1;
             HealthUpdate.text = "Lives: " + lives.ToString();
             source.PlayOneShot(clip3, 1f);
         }
-        // Αποτέλεσμα πτώσης από τα όρια της πίστας (Game Over)
+        // Result of falling outside the level boundaries (Game Over)
         if (other.gameObject.name == "PlatformLimits"){
             EndGame();
         }
     }
-    // συνάρτσηση διαχείρισης GAME OVER
-    //(σταματάει η κίνηση, ενεργοποιείται το GameOver TMPro, σταματάει κάθε άλλος ήχος, παίζει το clip1, ξεκινάει το παιχνίδι απ την αρχή)
+    // GAME OVER management function
+    // (stops movement, enables GameOver TMPro, stops all other audio, plays clip1, restarts the game)
     private void EndGame(){ 
         movement.enabled = false; 
         GameOver.enabled = true;
@@ -57,7 +57,7 @@ public class Collisions : MonoBehaviour
         source.PlayOneShot(clip1, 1f);
         Invoke("LoadMainScene", time); 
     }
-    // συνάρτηση επαναφόρτωσης σκηνής (αρχή game)
+    // Function to reload the scene (restart game)
     private void LoadMainScene(){
         SceneManager.LoadScene("MainScene"); 
         }
